@@ -1,0 +1,22 @@
+---
+
+ - name: talk to all hosts just so we can gather_data
+   hosts: all
+   tasks:
+     - name: Classify hosts depending on their OS distribution
+       group_by:
+         key: os_{{ ansible_facts['distribution'] }}
+
+ # now just on the CentOS hosts...
+
+ - hosts: os_CentOS
+   gather_facts: False
+   tasks:
+     - # tasks that only happen on CentOS go here
+
+  - hosts: os_Ubuntu
+    gather_facts: False
+    tasks:
+     - # tasks that only happen on Ubuntu go here
+
+

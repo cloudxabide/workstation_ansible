@@ -1,0 +1,25 @@
+---
+
+- name:            Downlaod OpenShift Client
+  hosts:           localhost
+  gather_facts:    false
+
+  vars:
+    download_dir:   /root/bundle
+    myfilename:     openshift-client-mac.tar.gz
+    mychecksum:     "sha256:21fe9b352c091938cb004e3a0bac071f697d3e96e652061c6520f21a68cf2e96."
+
+  tasks:
+    - name:         Make sure destination dir exists
+      file:
+        path:       "{{download_dir}}"
+        state:      directory
+        recurse:    yes
+    - name:         Download OCP client
+      get_url:
+        url:        https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-mac.tar.gz
+        #dest:      /root/openshift-client-mac.tar.gz
+        dest:       "{{download_dir}}/{{myfilename}}"
+        mode:       0666
+        checksum:   "{{mychecksum}}"
+
