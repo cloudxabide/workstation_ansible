@@ -3,11 +3,13 @@
     tasks:
       - name: Add Apt signing key
         ansible.builtin.apt_key:
-          url: "https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg"
+          url: "http://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg"
+          #url: "https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg"
           state: present
       - name: Add repository into sources list
         ansible.builtin.apt_repository:
-          repo: deb https://repository.spotify.com stable non-free
+          #repo: deb https://repository.spotify.com stable non-free
+          repo: deb http://repository.spotify.com stable non-free
           state: present
       - name: Install Spotify Client
         ansible.builtin.apt:
