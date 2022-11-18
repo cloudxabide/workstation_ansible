@@ -2,7 +2,7 @@
 - name: Manage Users OS-based vars
   include_vars: "{{ admin_groups, standard_groups }}"
   with_first_found:
-    - "{{ ansible_distribution }}.yaml"
+    - ../vars/"{{ ansible_distribution }}.yaml"
   tags: vars
 
 - hosts: all
