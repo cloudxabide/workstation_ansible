@@ -1,5 +1,5 @@
 ---
-- name: Manage Users - OS-based vars
+- name: Manage Users OS-based vars
   include_vars: "{{ admin_groups, standard_groups }}"
   with_first_found:
   with_first_found:
