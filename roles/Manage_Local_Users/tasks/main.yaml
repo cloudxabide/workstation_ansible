@@ -4,14 +4,14 @@
     gather_facts: true
     become: true
 
-  - name: Add User 'James Radtke'
+  - name: Add User - James Radtke
     ansible.builtin.user:
     name: jradtke
     comment: James Radtke
     shell: /bin/bash
     uid: 2025
     groups: '{{ admin_groups }}'
-  - name: Add User 'Mamie Colburn'
+  - name: Add User - Mamie Colburn
     ansible.builtin.user:
     name: mcolburn
     comment: Mamie Colburn
