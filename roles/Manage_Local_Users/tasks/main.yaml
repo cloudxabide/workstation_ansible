@@ -2,11 +2,11 @@
 - hosts: all
 
 - include: debian.yaml
-  when: ansible_os_family == 'Debian'
+  when: ansible_distribution == "Ubuntu"
   tags: package
 
-- include: redhat.yaml
-  when: ansible_os_family == 'RedHat'
+- include: fedora.yaml
+  when: ansible_distribution == "Fedora" or ansible_distribution == "Red Hat" or ansible_distribution == "CentOS"
   tags: package
 
 - name: Manage Users 
