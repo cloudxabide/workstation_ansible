@@ -1,0 +1,4 @@
+---
+- hosts: all
+  vars:
+    admin_groups: wheel
