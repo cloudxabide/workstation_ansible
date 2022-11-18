@@ -5,7 +5,7 @@
   when: ansible_distribution == "Ubuntu"
   tags: package
 
-- include: fedora.yaml
+- include: redhat.yaml
   when: ansible_distribution == "Fedora" or ansible_distribution == "Red Hat" or ansible_distribution == "CentOS"
   tags: package
 
