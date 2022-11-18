@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  gather_facts: true
 
 - include: ../vars/debian.yaml
   when: ansible_distribution == "Ubuntu"
