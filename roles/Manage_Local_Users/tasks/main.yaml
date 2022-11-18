@@ -1,0 +1,29 @@
+---
+- hosts: all
+
+- include: "{{role_path}}"/vars/debian.yaml
+  when: ansible_os_family == 'Debian'
+  tags: package
+
+- include: "{{role_path}}"/vars/redhat.yaml
+  when: ansible_os_family == 'RedHat'
+  tags: package
+
+  - name: Manage Users 
+    hosts: all 
+    gather_facts: no
+    connection: local
+    tasks:
+      - name: Add User 'James Radtke'
+        ansible.builtin.user:
+          name: jradtke
+          comment: James Radtke
+          shell: /bin/bash
+          uid: 2025
+          groups: '{{ admin_groups }}'
+      - name: Add User 'Mamie Colburn'
+        ansible.builtin.user:
+          name: mcolburn 
+          comment: Mamie Colburn
+          shell: /bin/bash
+          uid: 2026
