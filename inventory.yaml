@@ -2,7 +2,7 @@
 all:
   hosts:
     localhost
-  become: yes
-  become_method: sudo
-  connection: local
-  gather_facts: true
+#  become: yes
+#  become_method: sudo
+#  connection: local
+#  gather_facts: true
