@@ -10,4 +10,7 @@ I would like to have this code extensible for:
 * macOS
 
 
+## Steps
 
+* Run the [Pre-Reqs script](./Scripts/pre_steps.sh)  
+* Run the Playbook(s)
