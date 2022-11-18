@@ -12,7 +12,6 @@
   tags: package
 
 - name: Manage Users 
-  hosts: all 
   gather_facts: no
   tasks:
     - name: Add User 'James Radtke'
