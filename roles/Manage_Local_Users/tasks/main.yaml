@@ -10,7 +10,7 @@
         comment: James Radtke
         shell: /bin/bash
         uid: 2025
-#      groups: '{{ admin_groups }}'
+       groups: '{{ admin_groups }}'
     - name: Add User Mamie Colburn
       ansible.builtin.user:
         name: mcolburn
@@ -18,8 +18,8 @@
         shell: /bin/bash
         uid: 2026
     
-   ##   include_vars: "{{ admin_groups, standard_groups }}"
-   #   with_first_found:
-   #     - ../vars/"{{ ansible_distribution }}.yaml"
-   #   tags: vars
+    include_vars: "{{ admin_groups, standard_groups }}"
+    with_first_found:
+      - ../vars/"{{ ansible_distribution }}.yaml"
+    tags: vars
 
