@@ -1,11 +1,11 @@
 ---
 - hosts: all
 
-- include: "{{role_path}}"/vars/debian.yaml
+- include: debian.yaml
   when: ansible_os_family == 'Debian'
   tags: package
 
-- include: "{{role_path}}"/vars/redhat.yaml
+- include: redhat.yaml
   when: ansible_os_family == 'RedHat'
   tags: package
 
