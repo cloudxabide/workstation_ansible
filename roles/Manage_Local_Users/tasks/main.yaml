@@ -1,8 +1,8 @@
 ---
-  - name: Manage Users OS-based vars
-    hosts: all
-    gather_facts: true
-    become: true
+#  - name: Manage Users OS-based vars
+#    hosts: all
+#    gather_facts: true
+#    become: true
 
   - name: Add User - James Radtke
     ansible.builtin.user:
