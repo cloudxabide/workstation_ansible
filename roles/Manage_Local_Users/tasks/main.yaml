@@ -10,7 +10,7 @@
         comment: James Radtke
         shell: /bin/bash
         uid: 2025
-       groups: '{{ admin_groups }}'
+        groups: "{{ admin_groups }}"
     - name: Add User Mamie Colburn
       ansible.builtin.user:
         name: mcolburn
