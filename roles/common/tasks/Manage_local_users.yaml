@@ -1,7 +1,7 @@
 ---
 - hosts: all
 
-- include: "{{role_path}}"//vars/debian.yaml
+- include: "{{role_path}}"/vars/debian.yaml
   when: ansible_os_family == 'Debian'
   tags: package
 
