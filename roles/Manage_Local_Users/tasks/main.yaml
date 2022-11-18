@@ -1,13 +1,12 @@
 ---
 - name: Manage Users - OS-based vars
-  include: ../vars/debian.yaml
-    when: ansible_distribution == "Ubuntu"
-    tags: package
+- include: ../vars/debian.yaml
+  when: ansible_distribution == "Ubuntu"
+  tags: package
 
-  include: ../vars/redhat.yaml
-    when: ansible_distribution == "Fedora" or ansible_distribution == "Red Hat" or ansible_distribution == "CentOS"
-    tags: package
-
+- include: ../vars/redhat.yaml
+  when: ansible_distribution == "Fedora" or ansible_distribution == "Red Hat" or ansible_distribution == "CentOS"
+  tags: package
 
 - hosts: all
   gather_facts: true
