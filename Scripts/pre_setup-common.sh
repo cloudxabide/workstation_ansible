@@ -35,12 +35,10 @@ sudo $PKG_MGR -y install git ansible
 # Clone this repo to local machine
 mkdir -p ${HOME}/Repositories/Personal/${GIT_USER}; cd $_
 git clone https://github.com/${GIT_USER}/${REPO_NAME}
+cd ${REPO_NAME}
 
 # Update sudo
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/$USER
-
+sudo restorecon -RFvv /etc/sudoers.d/$USER
 #
 echo "Note:  time to go run some playbooks"
-
-
-
