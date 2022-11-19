@@ -1,8 +1,12 @@
 ---
 # tasks file for Update_OS
-- name: Update OS | RHEL and derivatives
+- name: Update OS | RHEL or CentOS 
   import_tasks: redhat.yml
-  when: ansible_facts['os_family']|lower == 'redhat'
+  when: ansible_facts['ansible_distribution']|lower == 'redhat'
+
+- name: Update OS | Fedora
+  import_tasks: fedora.yml
+  when: ansible_facts['ansible_distribution']|lower == 'fedora'
 
 - name: Update OS | Debian and derivatives
   import_tasks: debian.yml
