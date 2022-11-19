@@ -1,11 +1,6 @@
 ---
-
-  - name: talk to all hosts just so we can gather_data
-    hosts: all
-    tasks:
-      - name: Classify hosts depending on their OS distribution
-        group_by:
-          key: os_{{ ansible_facts['distribution'] }}
-
-  - roles:
-    - Update_OS
+- hosts: all
+  gather_facts: true
+  roles:
+    - role: Install_Google_Chrome
+#    - role: Update_OS
