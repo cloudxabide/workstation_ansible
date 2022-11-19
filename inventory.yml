@@ -6,5 +6,3 @@ all:
       ansible_connection: local
       become: true
       become_method: sudo
-
-
