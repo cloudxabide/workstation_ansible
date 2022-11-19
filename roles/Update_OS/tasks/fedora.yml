@@ -1,36 +1,13 @@
 ---
-- name: Patch and reboot systems
+- name: Patch and reboot systems (fedora)
   hosts: all
   vars:
-    yum_name: "*"
-    yum_state:  latest
-    yum_enablerepo: "rhel-?-server-rpms,rhel-?-server-satellite-tools-6.?-rpms"
-    yum_disablerepo: "*"
-    yum_exclude: ""
     dnf_name: "*"
     dnf_state: latest
-    dnf_enablerepo: "rhel-8-for-x86_64-appstream-rpms,rhel-8-for-x86_64-baseos-rpms,satellite-tools-6.?-for-rhel-8-x86_64-rpms"
+    dnf_enablerepo: "*"
     dnf_disablerepo: "*"
     dnf_exclude: ""
   tasks:
-    - name: upgrade packages via yum
-      yum:
-        name={{ yum_name }}
-        state={{ yum_state }}
-        disablerepo={{ yum_disablerepo }}
-        enablerepo={{ yum_enablerepo }}
-        exclude={{ yum_exclude }}
-      become: "yes"
-      register: yumcommandout
-      when:
-        - (ansible_facts['distribution_major_version'] == '6') or
-          (ansible_facts['distribution_major_version'] == '7')
-
-    - name: Print errors if yum failed
-      debug:
-        msg: "yum command produced errors"
-      when: yumcommandout is not defined
-
     - name: upgrade packages via dnf
       dnf:
         name={{ dnf_name }}
@@ -41,7 +18,7 @@
       become: "yes"
       register: dnfcommandout
       when:
-        - ansible_facts['distribution_major_version'] == '8'
+        - ansible_facts['ansible_distribution'] == 'Fedora'
 
     - name: Print errors if dnf failed
       debug:
