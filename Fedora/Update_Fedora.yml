@@ -1,0 +1,128 @@
+---
+# - name: install Google Chrome
+#  hosts: all
+#  gather_facts: false
+#  become: true
+#  tasks:
+#    - name: Add Yum signing key
+#      rpm_key:
+#        key: https://dl.google.com/linux/linux_signing_key.pub
+#        state: present
+#    - name: Add repository into repo.d list
+#      yum_repository:
+#        name: google-chrome
+#        description: google-chrome repository
+#        baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+#        enabled: true
+#        gpgcheck: true
+#        gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+#    - name: Install google-chrome-stable
+#      yum:
+#        name: "google-chrome-stable"
+#        state: latest
+#        update_cache: true
+# - name: Manage Users
+#   hosts: localhost
+#   gather_facts: false
+#   become: true
+#   tasks:
+#     - name: Add User | Morpheus Simulacrum
+#       ansible.builtin.user:
+#         name: morpheus
+#         comment: Morpheus Simulacrum
+#         shell: /bin/bash
+#         uid: 2001
+#         groups: wheel
+#     - name: Add User | James Radtke
+#       ansible.builtin.user:
+#         name: jradtke
+#         comment: James Radtke
+#         shell: /bin/bash
+#        uid: 2025
+#        groups: wheel
+#    - name: Add user "jradtke" to sudo
+#      lineinfile:
+#        path: /etc/sudoers.d/jradtke
+#        line: 'jradtke ALL=(ALL) NOPASSWD: ALL'
+#        state: present
+#        mode: 0440
+#        create: yes
+#        validate: 'visudo -cf %s'
+#    - name: Add User | M C
+#      ansible.builtin.user:
+#        name: mcolburn
+#        comment: M C
+#        shell: /bin/bash
+#        uid: 2026
+# - name: Update OS
+#  hosts: all
+#  gather_facts: false
+#  become: true
+#  tasks:
+#    - name: upgrade all packages
+#      ansible.builtin.dnf:
+#        name: "*"
+#        state: latest
+# - name: Add Repository | RPM Fusion
+#  hosts: localhost 
+#  gather_facts: true
+#  become: true
+#  tasks:
+#    - name: Importing (free) key
+#      ansible.builtin.rpm_key:
+#        state: present
+#        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+#      when: ansible_distribution == 'Fedora'
+#    - name: Importing (non-free) key
+#      ansible.builtin.rpm_key:
+#        state: present
+#        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+#      when: ansible_distribution == 'Fedora'
+#    - name: Enable RPM Fusion Free
+#      dnf:
+#        name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
+#        state: present
+#      when: ansible_distribution == 'Fedora'
+#    - name: Enable RPM Fusion Non-Free
+#      dnf:
+#        name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
+#        state: present
+#      when: ansible_distribution == 'Fedora'
+# - name: Install VScode | Microsoft (no, really...) 
+#  hosts: localhost 
+#  gather_facts: true
+#  become: true
+#  tasks:
+#    - name: Add Yum signing key
+#      ansible.builtin.rpm_key:
+#        key: "https://packages.microsoft.com/keys/microsoft.asc"
+#        state: present
+#    - name: Add repository into repo.d list
+#      ansible.builtin.yum_repository:
+#        name: vscode
+#        description: Virtual Studio Code
+#        baseurl: "https://packages.microsoft.com/yumrepos/vscode"
+#        enabled: true
+#        gpgcheck: true
+#        gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+#    - name: Install VScode
+#      ansible.builtin.dnf:
+#        name: code
+#        state: latest
+# - name: Install Packages
+#   hosts: localhost 
+#  gather_facts: true
+#  become: true
+#  tasks:
+#    - name: Load Package List based on OS
+#      include_vars: "{{ item }}"
+#      with_first_found:
+#        - "vars/{{ ansible_distribution }}.yml"
+#        - '{{ ansible_os_family }}.yml'
+#        - default.yml
+#    - name: Install Packages
+#      ansible.builtin.dnf:
+#        name: "{{ item }}"
+#        update_cache: true
+#      loop:
+#        - "{{ packages }}"

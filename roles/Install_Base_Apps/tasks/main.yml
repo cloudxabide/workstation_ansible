@@ -1,2 +1,19 @@
 ---
-# tasks file for Install_Base_Apps
+- name: Gather OS specific variables (package names)
+  debug:
+    msg: "{{ item }}"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "vars/{{ ansible_distribution }}.yml"
+        - "vars/{{ ansible_os_family }}.yml"
+        - vars/default.yml
+    - paths:
+        - ../vars
+# - name: Fedora Package Install
+#      ansible.builtin.dnf:
+#        name: "{{ item }}"
+#        state: installed
+#        loop:
+#          - "{{ software_packages }}"
+# https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
