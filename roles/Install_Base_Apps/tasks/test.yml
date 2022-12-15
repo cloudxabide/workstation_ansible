@@ -1,0 +1,13 @@
+- name: Gather OS specific variables
+  include_vars: "{{ osvars }}"
+  vars:
+    osvars_:
+      files:
+        - "{{ ansible_os_family }}-{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_os_family }}-{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - ../vars
+    osvars: "{{ lookup('first_found', osvars_, errors='ignore') }}"
+  when:
+    - (osvars | length > 0)
